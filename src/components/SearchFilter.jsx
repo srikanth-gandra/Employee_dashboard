@@ -8,7 +8,6 @@ export default function SearchFilter({ setFilteredEmployees }) {
   const [gender, setGender] = useState("");
   const [status, setStatus] = useState("");
 
-  // Filter employees whenever search/gender/status changes
   useEffect(() => {
     let filtered = [...employees];
 
@@ -33,7 +32,6 @@ export default function SearchFilter({ setFilteredEmployees }) {
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-md mb-6 p-4 w-full max-w-8xl mx-auto flex flex-col sm:flex-row gap-4 items-start sm:items-center">
       
-      {/* Search input */}
       <input
         type="text"
         placeholder="Search by name"
@@ -42,7 +40,6 @@ export default function SearchFilter({ setFilteredEmployees }) {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      {/* Gender filter */}
       <select
         className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm w-full sm:w-1/4"
         value={gender}
@@ -53,7 +50,6 @@ export default function SearchFilter({ setFilteredEmployees }) {
         <option>Female</option>
       </select>
 
-      {/* Status filter */}
       <select
         className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm w-full sm:w-1/4"
         value={status}

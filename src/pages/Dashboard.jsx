@@ -12,62 +12,99 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   const [filteredEmployees, setFilteredEmployees] = useState(employees);
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     setFilteredEmployees(employees);
   }, [employees]);
 
+  // Auto-hide toast
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => setToast(null), 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
   const active = filteredEmployees.filter((e) => e.active).length;
 
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    setToast({
+      type: "success",
+      message: "Logged out successfully"
+    });
+
+    setTimeout(() => {
+      logout();
+      navigate("/");
+    }, 800);
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-10">
-      {/* Logout Button */}
-      <div className="flex justify-end mb-6">
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+    <>
+      {/* TOAST */}
+      {toast && (
+        <div
+          className={`fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg text-white
+          ${
+            toast.type === "success"
+              ? "bg-green-600"
+              : "bg-red-600"
+          }`}
         >
-          Logout
-        </button>
-      </div>
-
-      <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center sm:text-center">
-        Employee Dashboard
-      </h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6 max-w-7xl mx-auto">
-        <div className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-          <p className="text-gray-500">Total Employees</p>
-          <p className="text-2xl font-bold">{filteredEmployees.length}</p>
+          {toast.message}
         </div>
-        <div className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-          <p className="text-gray-500">Active</p>
-          <p className="text-2xl font-bold text-green-600">{active}</p>
+      )}
+
+      <div className="bg-gray-100 min-h-screen p-4 sm:p-6 lg:p-10">
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+          >
+            Logout
+          </button>
         </div>
-        <div className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
-          <p className="text-gray-500">Inactive</p>
-          <p className="text-2xl font-bold text-red-600">
-            {filteredEmployees.length - active}
-          </p>
+
+        <h1 className="text-3xl font-bold mb-6 text-gray-800 text-center">
+          Employee Dashboard
+        </h1>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6 max-w-7xl mx-auto">
+          <div className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+            <p className="text-gray-500">Total Employees</p>
+            <p className="text-2xl font-bold">
+              {filteredEmployees.length}
+            </p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+            <p className="text-gray-500">Active</p>
+            <p className="text-2xl font-bold text-green-600">
+              {active}
+            </p>
+          </div>
+
+          <div className="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+            <p className="text-gray-500">Inactive</p>
+            <p className="text-2xl font-bold text-red-600">
+              {filteredEmployees.length - active}
+            </p>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto mb-6">
+          <EmployeeForm />
+        </div>
+
+        <div className="max-w-7xl mx-auto mb-6">
+          <SearchFilter setFilteredEmployees={setFilteredEmployees} />
+        </div>
+
+        <div className="max-w-7xl mx-auto">
+          <EmployeeTable filteredEmployees={filteredEmployees} />
         </div>
       </div>
-
-      <div className="max-w-7xl mx-auto mb-6">
-        <EmployeeForm />
-      </div>
-
-      <div className="max-w-7xl mx-auto mb-6">
-        <SearchFilter setFilteredEmployees={setFilteredEmployees} />
-      </div>
-
-      <div className="max-w-7xl mx-auto">
-        <EmployeeTable filteredEmployees={filteredEmployees} />
-      </div>
-    </div>
+    </>
   );
 }

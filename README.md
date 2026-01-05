@@ -1,16 +1,69 @@
-# React + Vite
+# Employee Management Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
+The **Employee Management Dashboard** is a modern, responsive web application built with React.js. It allows an organization to manage employees efficiently with functionalities such as:
 
-Currently, two official plugins are available:
+- Secure login authentication
+- Add, edit, and delete employee records
+- Upload and preview profile images
+- Toggle active/inactive status
+- Search and filter employees by name, gender, and status
+- Print employee list
+- Dashboard summary with total, active, and inactive employees
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project demonstrates a clean **UI/UX design**, responsive layout, and state management using **React Context**.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack Used
 
-## Expanding the ESLint configuration
+- **Frontend**:  
+  - React.js (functional components + hooks)  
+  - TailwindCSS for styling  
+  - React Router DOM for routing  
+- **State Management**:  
+  - React Context API (`AuthContext` and `EmployeeContext`)  
+- **Storage / Data**:  
+  - LocalStorage for persisting employee data  
+- **Other Libraries**:  
+  - None (fully React + TailwindCSS, no external UI libraries)  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Features
+
+1. **Authentication**
+   - Login page with email/password
+   - Prevent access to dashboard without login
+   - Logout functionality  
+
+2. **Dashboard**
+   - Summary cards: total employees, active, inactive
+   - Add/Edit employee form with validation and image upload
+   - Search and filter employees
+   - Responsive employee table with actions (Edit, Delete, Print)
+
+3. **Employee Form**
+   - Full Name, Gender, Date of Birth, State
+   - Active/Inactive toggle
+   - Image upload with preview
+   - Validation on required fields
+
+4. **Employee Table**
+   - Displays employee ID, profile image, name, gender, DOB, state, status
+   - Action buttons for Edit, Delete, Print
+   - Fully responsive
+
+---
+
+## Steps to Run the Project Locally
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/<your-username>/employee-dashboard.git
+cd employee-dashboard
+
+npm install
+
+npm run dev

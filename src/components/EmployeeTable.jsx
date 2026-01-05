@@ -17,7 +17,6 @@ export default function EmployeeTable({ filteredEmployees }) {
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-lg overflow-x-auto">
-      {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between mb-4 items-start sm:items-center gap-4">
         <h2 className="text-2xl font-bold text-gray-800">Employee List</h2>
         <button
@@ -28,7 +27,6 @@ export default function EmployeeTable({ filteredEmployees }) {
         </button>
       </div>
 
-      {/* Table */}
       <table className="min-w-full border-collapse text-center">
         <thead className="bg-gray-100">
           <tr className="text-gray-700 uppercase text-sm">
@@ -64,7 +62,6 @@ export default function EmployeeTable({ filteredEmployees }) {
               <td className="py-2 px-2">{emp.dob}</td>
               <td className="py-2 px-2">{emp.state}</td>
 
-              {/* Active toggle */}
               <td className="py-2 px-2">
                 <input
                   type="checkbox"
@@ -76,7 +73,6 @@ export default function EmployeeTable({ filteredEmployees }) {
                 />
               </td>
 
-              {/* Actions */}
               <td className="py-2 px-2 flex justify-center gap-2">
                 <button
                   onClick={() => setEditingEmployee(emp)}
@@ -102,7 +98,6 @@ export default function EmployeeTable({ filteredEmployees }) {
             </tr>
           ))}
 
-          {/* Empty state */}
           {employees.length === 0 && (
             <tr>
               <td colSpan="8" className="p-6 text-gray-500">
