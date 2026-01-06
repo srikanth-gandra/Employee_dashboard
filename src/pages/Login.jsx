@@ -10,7 +10,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [toast, setToast] = useState(null);
 
-  // Auto-hide toast
   useEffect(() => {
     if (toast) {
       const timer = setTimeout(() => setToast(null), 3000);
@@ -47,7 +46,6 @@ export default function Login() {
 
   return (
     <>
-      {/* TOAST */}
       {toast && (
         <div
           className={`fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg text-white

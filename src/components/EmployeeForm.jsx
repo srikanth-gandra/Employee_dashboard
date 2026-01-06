@@ -25,9 +25,6 @@ export default function EmployeeForm() {
   const [showPreview, setShowPreview] = useState(false);
   const [toast, setToast] = useState(null);
 
-  /* ======================
-     AUTO HIDE TOAST
-  ====================== */
   useEffect(() => {
     if (toast) {
       const timer = setTimeout(() => setToast(null), 3000);
@@ -35,9 +32,6 @@ export default function EmployeeForm() {
     }
   }, [toast]);
 
-  /* ======================
-     EDIT MODE
-  ====================== */
   useEffect(() => {
     if (editingEmployee) {
       setForm({
@@ -47,9 +41,6 @@ export default function EmployeeForm() {
     }
   }, [editingEmployee]);
 
-  /* ======================
-     IMAGE HANDLER
-  ====================== */
   const handleImage = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -60,9 +51,6 @@ export default function EmployeeForm() {
     reader.readAsDataURL(file);
   };
 
-  /* ======================
-     RESET FORM (NO TOAST)
-  ====================== */
   const resetForm = () => {
     setForm({
       id: null,
@@ -77,9 +65,6 @@ export default function EmployeeForm() {
     setEditingEmployee(null);
   };
 
-  /* ======================
-     RESET WITH TOAST
-  ====================== */
   const handleReset = () => {
     resetForm();
     setToast({
@@ -88,16 +73,13 @@ export default function EmployeeForm() {
     });
   };
 
-  /* ======================
-     SUBMIT
-  ====================== */
   const submit = (e) => {
     e.preventDefault();
 
     if (!form.name || !form.gender || !form.state) {
       setToast({
         type: "error",
-        message: "Please fill all required fields"
+        message: "Please fill all fields"
       });
       return;
     }
@@ -126,9 +108,6 @@ export default function EmployeeForm() {
 
   return (
     <>
-      {/* ======================
-           TOAST
-      ====================== */}
       {toast && (
         <div
           className={`fixed top-5 right-5 z-50 px-4 py-3 rounded-lg shadow-lg text-white transition-all duration-300
@@ -144,9 +123,6 @@ export default function EmployeeForm() {
         </div>
       )}
 
-      {/* ======================
-           FORM
-      ====================== */}
       <form
         onSubmit={submit}
         className="bg-white rounded-xl shadow-lg p-6 mb-6 max-w-7xl mx-auto"
@@ -155,7 +131,6 @@ export default function EmployeeForm() {
           {form.id ? "Edit Employee" : "Add Employee"}
         </h2>
 
-        {/* Fields */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <input
             placeholder="Full Name"
@@ -203,7 +178,6 @@ export default function EmployeeForm() {
           </select>
         </div>
 
-        {/* Image + Preview */}
         <div className="mt-6 flex flex-wrap items-center gap-6">
           <input
             type="file"
@@ -244,7 +218,6 @@ export default function EmployeeForm() {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="mt-6 flex justify-end gap-4">
           <button
             type="button"
@@ -263,9 +236,6 @@ export default function EmployeeForm() {
         </div>
       </form>
 
-      {/* ======================
-           IMAGE PREVIEW MODAL
-      ====================== */}
       {showPreview && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-4 relative max-w-md w-full">
